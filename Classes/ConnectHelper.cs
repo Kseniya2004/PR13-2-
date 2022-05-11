@@ -4,27 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows;
 
 namespace PR13_2_.Classes
 {
     class ConnectHelper
     {
         public static List<PRICE> pricies = new List<PRICE>();
+
+        public static string fileName;
+
         public static void ReadListFromFile(string filename)
         {
-            StreamReader streamReader = new StreamReader(filename, Encoding.UTF8);
-            while (!streamReader.EndOfStream)
+            pricies.Clear();
+            try
             {
-                string line = streamReader.ReadLine();
-                string[] items = line.Split(';');
-                PRICE pricy = new PRICE()
+                StreamReader streamReader = new StreamReader(filename, Encoding.UTF8);
+                while (!streamReader.EndOfStream)
                 {
-                    Name = items[0].Trim(),
-                    Shop = items[1].Trim(),
-                    Price = double.Parse(items[2].Trim()),
-                    Amount = int.Parse(items[3].Trim())
-                };
-                pricies.Add(pricy);
+                    string line = streamReader.ReadLine();
+                    string[] items = line.Split(';');
+                    PRICE pricy = new PRICE()
+                    {
+                        Name = items[0].Trim(),
+                        Shop = items[1].Trim(),
+                        Price = double.Parse(items[2].Trim()),
+                        Amount = int.Parse(items[3].Trim())
+                    };
+                    pricies.Add(pricy);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Неверный формат файла!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
         public static void SaveListToFile(string filename)

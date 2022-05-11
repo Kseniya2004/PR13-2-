@@ -5,21 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PR13_2_"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="520" Width="750">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0"
+                    Grid.RowSpan="2"
                     Orientation="Vertical"
-                    VerticalAlignment="Top">            
-            <Button Name="BtnPrint"
+                    VerticalAlignment="Top">
+            <Button Name="BtnOpen"
+                    Click="BtnOpen_Click"
                     Width="130"
                     Height="30"
-                    Content="Список товаров"
-                    Margin="5"
-                    Click="BtnPrint_Click"/>
+                    Content="Открыть"
+                    Margin="6"
+                    Background="Red"
+                    Foreground="White"
+                    FontSize="18"
+                    FontWeight="Bold"/>
+            
             <TextBlock Text="Поиск:"
                        Width="130"
                     Height="20"
@@ -27,20 +37,7 @@
             <TextBox Width="130"
                     Height="30"
                      Name="TxtSearch"
-                     TextChanged="TxtSearch_TextChanged"/>
-
-            <Button Name="BtnAdd"
-                    Click="BtnAdd_Click"
-                    Width="130"
-                    Height="30"
-                    Content="Добавить товар"
-                    Margin="5" />
-            <Button Name="BtnClear"
-                    Click="BtnClear_Click"
-                    Width="130"
-                    Height="30"
-                    Content="Очистить"
-                    Margin="5"/>
+                     TextChanged="TxtSearch_TextChanged"/>            
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Center"
                         Height="80" Width="130">
@@ -66,13 +63,62 @@
                 </ComboBox>
             </StackPanel>
             <TextBlock Text="Количество товаров: "
-                       x:Name="txtResult"
-                       HorizontalAlignment="Center"
+                       x:Name="txbCount"
+                       HorizontalAlignment="Left"
                        Margin="5"/>
+            <TextBlock Text="Максимальная цена:"                       
+                       HorizontalAlignment="Left"
+                       Margin="5"/>
+            <TextBlock x:Name="txbMax"
+                       HorizontalAlignment="Left"
+                       Margin="5"/>
+            <TextBlock Text="Минимальная цена:"                       
+                       HorizontalAlignment="Left"
+                       Margin="5"/>
+            <TextBlock x:Name="txbMin"
+                       HorizontalAlignment="Left"
+                       Margin="5"/>
+            <TextBlock Text="Общая стоимость:"                       
+                       HorizontalAlignment="Left"
+                       Margin="5"/>
+            <TextBlock x:Name="txbSum"
+                       HorizontalAlignment="Left"
+                       Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Button Name="BtnPrint"
+                    Width="130"
+                    Height="30"
+                    Content="Список товаров"
+                    Margin="5"
+                    Click="BtnPrint_Click"/>
+            <Button Name="BtnAdd"
+                    Click="BtnAdd_Click"
+                    Width="130"
+                    Height="30"
+                    Content="Добавить товар"
+                    Margin="5" />
+            <Button Name="BtnClear"
+                    Click="BtnClear_Click"
+                    Width="130"
+                    Height="30"
+                    Content="Очистить"
+                    Margin="5"/>
+            <Button Name="BtnSave"
+                    Click="BtnSave_Click"
+                    Width="130"
+                    Height="30"
+                    Content="Сохранить как"
+                    Margin="5"/>
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Top"
-                    Grid.Column="1">
+                    Grid.Column="1"
+                    Grid.Row="1">
             <Image Height="100" Width ="400" Source="Resources/Task.png"
                    Stretch="Fill" Margin="5"/>
             <DataGrid Name="DtgListPreparate"
@@ -98,7 +144,7 @@
                                 <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Center">
                                     <Button 
-                                        Margin="5"
+                                    Margin="5"
                                     Width="100"
                                     Name="BtnEdit"
                                     Click="BtnEdit_Click"

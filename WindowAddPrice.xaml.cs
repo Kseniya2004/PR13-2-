@@ -38,6 +38,22 @@ namespace PR13_2_
         }
         private void BtnAddPrice_Click(object sender, RoutedEventArgs e)
         {
+            
+            if (int.Parse(TxbAmount.Text) < 0)
+            {
+                MessageBox.Show("Количество не может быть отрицательным", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TxbAmount.Clear();
+                TxbAmount.Focus();
+                return;
+            }
+            if (double.Parse(TxbPrice.Text) < 0)
+            {
+                MessageBox.Show("Цена не может быть отрицательным", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                TxbPrice.Clear();
+                TxbPrice.Focus();
+                return;
+            }
+            //добавление данных
             if (mode == 0)
             {
                 try
@@ -58,6 +74,7 @@ namespace PR13_2_
                     return;
                 }
             }
+            //редактирование данных
             else
             {
                 try
